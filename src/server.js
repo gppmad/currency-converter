@@ -8,8 +8,6 @@ var bodyParser = require('body-parser');
 var xml_parser = require('fast-xml-parser');
 var _ = require('lodash');
 
-
-
 // - - - Avoid conflict with app_request - - - 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -34,7 +32,6 @@ app.use(function (req, res, next) {
 
 
 // Root API
-
 app.get('/api/convert', (req, res) => {
     
     var amount = "";
@@ -44,21 +41,20 @@ app.get('/api/convert', (req, res) => {
     var flag_parameters_ok = false;
 
     // Fetch value from JSON
-    amount = parseFloat(req.body.amount);
-    src_currency = req.body.src_currency;
-    dest_currency = req.body.dest_currency;
-    reference_date = req.body.reference_date;
-
-    if(amount && src_currency && dest_currency && reference_date ) {
-        flag_parameters_ok = true;
+    try {
+        amount = parseFloat(req.body.amount);
+        src_currency = req.body.src_currency;
+        dest_currency = req.body.dest_currency;
+        reference_date = req.body.reference_date;
+        
     }
-    else {
-        res.send("Something is wrong with your parameters");
+    catch(error) {
+        res.status(400).send("Something is wrong with your parameters");
         return;
     }
-    
+
     //
-    if(flag_parameters_ok) {
+    if(amount && src_currency && dest_currency && reference_date ) {
 
         var final_value = "";
         var jsonObj = {};
@@ -155,12 +151,14 @@ app.get('/api/convert', (req, res) => {
                 
         })
         .catch(error => {
-            res.send ("Convert API Not Available");
+            res.status(500).send ("Convert API Not Available");
         });
+    }
+    else {
+        
+        res.status(400).send("Something is wrong with your parameters");
     }
     
 });
-
-  
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
