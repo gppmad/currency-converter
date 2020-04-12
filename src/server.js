@@ -1,7 +1,7 @@
 "use strict"
 const express = require('express')
 const app = express()
-const port = 80
+const port = 8080
 const axios = require('axios');
 
 var bodyParser = require('body-parser'); 
@@ -30,9 +30,12 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/api/convert', (req, res) => {
+    res.send("Welcome to Currency Converter Server");
+});
 
 // Root API
-app.get('/api/convert', (req, res) => {
+app.post('/api/convert', (req, res) => {
     
     var amount = "";
     var src_currency = "";
