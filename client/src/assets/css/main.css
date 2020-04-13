@@ -1,0 +1,40 @@
+.v-application{
+  font-family: Roboto, sans-serif;  
+}
+
+a{
+    text-decoration: none;
+}
+
+.custom-text{
+    color: #298103 !important;
+}
+
+.color-success{
+    background-color: #298103 !important;
+    color: #ffffff !important;
+  }
+
+.color-off{
+background-color: rgb(170, 165, 165) !important;
+color: #ffffff !important;
+}
+
+/* modificata questa classe per v-select dentro site-overview -> da mobile non visualizzabile  */
+.v-input__control{
+    min-height: 48px;
+    padding: 0;
+    min-width: 210px;
+}
+
+.v-application a{
+  color:inherit;
+}
+
+.custom-container{
+  background-color: rgb(219, 215, 215) !important;
+}
+
+.custom-date-input > .v-input__control > .v-input__slot{
+  width: 135px !important;
+}
