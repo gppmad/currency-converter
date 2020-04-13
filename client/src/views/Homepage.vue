@@ -256,7 +256,7 @@ export default {
 
     getConversion: function(){
       axios
-        .post('http://192.168.8.101/api/convert',{          
+        .post('http://192.168.8.101:8000/api/convert/retrieve',{          
             amount: this.amountFrom,
             src_currency: this.currencyFrom,
             dest_currency: this.currencyTo,
