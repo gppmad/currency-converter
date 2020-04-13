@@ -1,7 +1,7 @@
 "use strict"
 const express = require('express')
 const app = express()
-const port = 8080
+const port = 8000
 const axios = require('axios');
 
 var bodyParser = require('body-parser'); 
@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
