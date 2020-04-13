@@ -30,12 +30,189 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/api/convert', (req, res) => {
+app.get('/', (req, res) => {
     res.send("Welcome to Currency Converter Server");
 });
 
-// Root API
-app.post('/api/convert', (req, res) => {
+// API PREPARE
+app.get('/api/convert/prepare', (req, res) => {
+    var res_json_obj = {};
+    res_json_obj.lastAvailableDate = "";
+    res_json_obj.firstAvailableDate = "";
+    var jsonObj = {}
+    res_json_obj.currenciesList = [
+        {
+            "label": "EUR - Euro",
+            "value": "EUR"
+        },
+        {
+            "label": "JPY - Japanese Yen",
+            "value": "JPY"
+        },
+        {
+            "label": "BGN - Bulgarian Lev",
+            "value": "BGN"
+        },
+        {
+            "label": "USD - United States Dollar",
+            "value": "USD"
+        },
+        {
+            "label": "CZK - Czech Koruna",
+            "value": "CZK"
+        },
+        {
+            "label": "DKK - Danish Krone",
+            "value": "DKK"
+        },
+        {
+            "label": "GBP - British Pound Sterling",
+            "value": "GBP"
+        },
+        {
+            "label": "HUF - Hungarian Forint",
+            "value": "HUF"
+        },
+        {
+            "label": "PLN - Polish Zloty",
+            "value": "PLN"
+        },
+        {
+            "label": "RON - Romanian Leu",
+            "value": "RON"
+        },
+        {
+            "label": "SEK - Swedish Krona",
+            "value": "SEK"
+        },
+        {
+            "label": "CHF - Swiss Franc",
+            "value": "CHF"
+        },
+        {
+            "label": "ISK - Icelandic Króna",
+            "value": "ISK"
+        },
+        {
+            "label": "NOK - Norwegian Krone",
+            "value": "NOK"
+        },
+        {
+            "label": "HRK - Croatian Kuna",
+            "value": "HRK"
+        },
+        {
+            "label": "RUB - Russian Ruble",
+            "value": "RUB"
+        },
+        {
+            "label": "TRY - Turkish Lira",
+            "value": "TRY"
+        },
+        {
+            "label": "AUD - Australian Dollar",
+            "value": "AUD"
+        },
+        {
+            "label": "BRL - Brazilian Real",
+            "value": "BRL"
+        },
+        {
+            "label": "CAD - Canadian Dollar",
+            "value": "CAD"
+        },
+        {
+            "label": "CNY - Chinese Yuan Renminbi",
+            "value": "CNY"
+        },
+        {
+            "label": "HKD - Hong Kong Dollar",
+            "value": "HKD"
+        },
+        {
+            "label": "IDR - Indonesian Rupiah",
+            "value": "IDR"
+        },
+        {
+            "label": "ILS - Israeli New Sheqel",
+            "value": "ILS"
+        },
+        {
+            "label": "INR - Indian Rupee",
+            "value": "INR"
+        },
+        {
+            "label": "KRW - South Korean Won",
+            "value": "KRW"
+        },
+        {
+            "label": "MXN - Mexican Peso",
+            "value": "MXN"
+        },
+        {
+            "label": "MYR - Malaysian Ringgit",
+            "value": "MYR"
+        },
+        {
+            "label": "NZD - New Zealand Dollar",
+            "value": "NZD"
+        },
+        {
+            "label": "PHP - Philippine Peso",
+            "value": "PHP"
+        },
+        {
+            "label": "SGD - Singapore Dollar",
+            "value": "SGD"
+        },
+        {
+            "label": "THB - Thai Baht",
+            "value": "THB"
+        },
+        {
+            "label": "ZAR - South African Rand",
+            "value": "ZAR"
+        }
+    ];
+    
+    axios.get('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml')
+            .then(response => {
+
+                var cube_currency_list = response.data;
+                        
+                try {
+                    if( xml_parser.validate(cube_currency_list) === true) { 
+
+                        var options = {
+                            ignoreAttributes : false,
+                            trimValues: true
+                        };
+
+                        jsonObj = xml_parser.parse(cube_currency_list,options); //Convert Our XML to JSON.
+                                              
+                        // (1) Find list of currency per Date.
+                        var list_per_date = jsonObj['gesmes:Envelope'].Cube.Cube;
+
+                        
+                        res_json_obj.lastAvailableDate = list_per_date[0]['@_time']
+                        res_json_obj.firstAvailableDate = list_per_date[list_per_date.length-1]['@_time']
+
+                        console.log(list_per_date[0].Cube)
+                        res.send(res_json_obj);
+                    }
+                }
+                catch (err) {
+                    console.log(err);
+                }
+                
+        })
+        .catch(error => {
+            res.status(500).send ("Convert API Not Available");
+        });
+});
+
+// API RETRIEVE
+app.post('/api/convert/retrieve', (req, res) => {
     
     var amount = "";
     var src_currency = "";
@@ -85,7 +262,7 @@ app.post('/api/convert', (req, res) => {
                         var index_reference_date = _.findIndex(list_per_date, function(o) { return o['@_time'] == reference_date; });
 
                         if(index_reference_date == -1 ) {
-                            res.send("Date not valid");
+                            res.status(400).send("Date not valid");
                             return;
                         }
 
