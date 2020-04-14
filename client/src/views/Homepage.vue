@@ -52,6 +52,7 @@
           <!-- Amount -->
             <v-text-field
               v-model="amountFrom"
+              type="number"
               v-on:change="getConversionFrom()"
               value=""
               solo
@@ -87,6 +88,7 @@
             <!-- Amount -->
             <v-text-field 
                 v-on:change="getConversionTo()"
+                type="number"
                 solo
                 flat
                 outlined
