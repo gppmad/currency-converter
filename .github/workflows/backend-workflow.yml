@@ -12,20 +12,23 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        #node-version: [10.x, 12.x]
+        node-version: [10.x]
 
     steps:
       - name: Hello world
         uses: actions/hello-world-javascript-action@v1
         with:
           who-to-greet: 'Mona the Octocat'
-
-    #- uses: actions/checkout@v2
-    #- name: Use Node.js ${{ matrix.node-version }}
+      
+      - run: cd ./server
+      - name: Use Node.js ${{ matrix.node-version }}
+      - uses: actions/checkout@v2
+    
     #  uses: actions/setup-node@v1
     #  with:
     #    node-version: ${{ matrix.node-version }}
