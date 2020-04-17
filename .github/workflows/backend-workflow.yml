@@ -23,7 +23,7 @@ jobs:
       
       - name: RUN NPM CI
         run: npm ci
-        working-directory: server
+        working-directory: ./server
       
         
       #- name: CD
