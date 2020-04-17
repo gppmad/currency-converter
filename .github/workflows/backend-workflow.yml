@@ -20,18 +20,11 @@ jobs:
         node-version: [10.x]
 
     steps:
-      - name: Hello world
-        uses: actions/hello-world-javascript-action@v1
-        with:
-          who-to-greet: 'Mona the Octocat'
-          
-          
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1  
-      - run: cd ./server
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
+      
+      - name: RUN NPM CI
+        run: npm ci
+        working-directory: server
+      
         
       #- name: CD
       #- run: cd ./server
