@@ -20,10 +20,14 @@ jobs:
         node-version: [10.x]
 
     steps:
-      
-      - name: RUN NPM CI
-        run: npm ci
-        working-directory: ./server
+       
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+    
+      #- name: RUN NPM CI
+      #  run: npm ci
+      #  working-directory: ./server
       
         
       #- name: CD
