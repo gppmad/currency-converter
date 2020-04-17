@@ -25,8 +25,8 @@ jobs:
         with:
           who-to-greet: 'Mona the Octocat'
         
-      - name: CD
-      - run: cd ./server
+      #- name: CD
+      #- run: cd ./server
     
     #  uses: actions/setup-node@v1
     #  with:
