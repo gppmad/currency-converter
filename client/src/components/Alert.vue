@@ -1,32 +1,28 @@
 <template>
-  <div class="container custom-container">
-    <v-alert 
-      class="text-center" 
-      :value="showAlert"
-      :type="alertType" 
-      dismissible
-    >
-      {{alertMessage}}
-    </v-alert>
-  </div>
+  <v-alert
+    class="text-center mb-0"
+    :value="showAlert"
+    :type="alertType"
+    dismissible
+    transition="slide-y-reverse-transition"
+    duration="2000"
+  >
+    {{alertMessage}}
+  </v-alert>
 </template>
 
 <script>
-
 export default {
-  name: 'Alert',
+  name: "Alert",
 
   props:{
-      showAlert: Boolean,
-      alertMessage: String,
-      alertType: String,
+    showAlert: Boolean,
+    alertMessage: String,
+    alertType: String
   },
 
-data: () => ({
-
-  }),
-}
-
+  data: () => ({})
+};
 </script>
 
 <style scoped>
