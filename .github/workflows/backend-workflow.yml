@@ -20,14 +20,18 @@ jobs:
         node-version: [10.x]
 
     steps:
-      - name: Hello world
-        uses: actions/hello-world-javascript-action@v1
+       
+      - uses: actions/setup-node@v1
         with:
-          who-to-greet: 'Mona the Octocat'
+          node-version: ${{ matrix.node-version }}
+    
+      #- name: RUN NPM CI
+      #  run: npm ci
+      #  working-directory: ./server
       
-      - run: cd ./server
-      - name: Use Node.js ${{ matrix.node-version }}
-      - uses: actions/checkout@v2
+        
+      #- name: CD
+      #- run: cd ./server
     
     #  uses: actions/setup-node@v1
     #  with:

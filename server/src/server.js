@@ -1,12 +1,14 @@
 "use strict"
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 8000
+const port = 8000
 const axios = require('axios');
 
 var bodyParser = require('body-parser'); 
 var xml_parser = require('fast-xml-parser');
 var _ = require('lodash');
+var api_management = require('./utils/api_management')
+var api_manager = new api_management ()
 
 // - - - Avoid conflict with app_request - - - 
 app.use(bodyParser.json()); // for parsing application/json
@@ -206,7 +208,7 @@ app.get('/api/convert/prepare', (req, res) => {
                 }
                 
         })
-        .catch(error => {
+        .catch(error => {            
             res.status(500).send ("Convert API Not Available");
         });
 });
@@ -261,8 +263,8 @@ app.post('/api/convert/retrieve', (req, res) => {
                         var list_per_date = jsonObj['gesmes:Envelope'].Cube.Cube;
                         var index_reference_date = _.findIndex(list_per_date, function(o) { return o['@_time'] == reference_date; });
 
-                        if(index_reference_date == -1 ) {
-                            res.status(400).send("Date not valid");
+                        if(index_reference_date == -1 ) {                          
+                            res.status(400).send(api_manager.createErrorObject("error", "Date not valid!"));
                             return;
                         }
 

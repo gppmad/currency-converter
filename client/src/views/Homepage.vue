@@ -1,6 +1,7 @@
 <template>
   <v-card flat>
-    <v-container class="container custom-container">     
+    <Alert class="mb-0" :showAlert="this.showAlert" :alertMessage="this.alertMessage" :alertType="this.alertType"></Alert>   
+    <v-container class="container custom-container">   
       <!-- Date -->
       <v-row>
         <v-col cols="2" offset="5">
@@ -35,7 +36,7 @@
         </v-row>
       
         <v-row>
-          <v-col cols="3" offset="2">
+          <v-col cols="4" offset="1">
             <p class="font-weight-bold">From</p>
             <!-- Currency From -->
             <v-select class="pt-0 mt-4"
@@ -71,7 +72,7 @@
           </v-col>
       
       
-          <v-col cols="3">
+          <v-col cols="4">
             <p class="font-weight-bold">To</p>
             <!-- Currency To -->
             <v-select class="pt-0 mt-4"
@@ -106,9 +107,14 @@
 <script>
 
 import axios from 'axios';
+import Alert from '../components/Alert.vue';
 
 export default {
   name: 'Homepage',
+
+  components: {
+    Alert,
+  },
 
   data () {   
 
@@ -124,14 +130,17 @@ export default {
       dateMenu: false,
       currenciesList: [],
 
-      response:{}
-   
+      response:{},
+
+      showAlert:false,
+      alertMessage:"",
+      alertType:"error"   
     }
   },
 
   mounted(){
       axios
-        .get('http://192.168.8.101:8000/api/convert/prepare')
+        .get('http://localhost:8000/api/convert/prepare')
         .then(response => {
           this.minDate = response.data.firstAvailableDate,
           this.maxDate = response.data.lastAvailableDate,
@@ -140,18 +149,19 @@ export default {
           console.log('Api converter')
 
           return this.getConversionFrom()
-      })
+        })
   },
 
   methods:{
 
     getConversionFrom: function(){
+      this.disableAlert();
       if(this.amountFrom == '')
         this.amountTo = ''
       else
       {
         axios
-          .post('http://192.168.8.101:8000/api/convert/retrieve',{          
+          .post('http://localhost:8000/api/convert/retrieve',{          
               amount: this.amountFrom,
               src_currency: this.currencyFrom,
               dest_currency: this.currencyTo,
@@ -164,15 +174,19 @@ export default {
             console.log('Api converter.retrieve')
 
           })
+          .catch(error => {
+            this.enableAlert(error.response)
+          })
         }
     },
 
     getConversionTo: function(){
+      this.disableAlert();
       if(this.amountTo== '')
         this.amountFrom = ''
       else{
         axios
-          .post('http://192.168.8.101:8000/api/convert/retrieve',{          
+          .post('http://localhost:8000/api/convert/retrieve',{          
               amount: this.amountTo,
               src_currency: this.currencyTo,
               dest_currency: this.currencyFrom,
@@ -185,6 +199,9 @@ export default {
             console.log('Api converter.retrieve')
 
           })
+          .catch(error => {
+            this.enableAlert(error.response)
+          })
         }
     },
 
@@ -195,7 +212,16 @@ export default {
       this.getConversionFrom()
 
     },
-    
+
+    enableAlert: function(response){
+      this.showAlert = true,
+      this.alertMessage = response.data.errorMessage,
+      this.alertType = response.data.errorType
+    },
+
+    disableAlert: function(){
+      this.showAlert = false;
+    }
   }
     
 
