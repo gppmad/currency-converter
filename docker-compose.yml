@@ -5,9 +5,11 @@ services:
     container_name: app-currency-converter
     image: curr-conv-be:1.0
     build: ./server
+    working_dir: /app/services
     restart: always
     volumes:
-        - ./server:/usr/app/
+      - ./server:/app/services
     ports:
       - "8000:8000"
+ 
     
