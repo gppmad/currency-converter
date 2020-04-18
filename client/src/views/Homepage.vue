@@ -1,17 +1,37 @@
 <template>
-  <v-card flat>
-    <Alert class="mb-0" :showAlert="this.showAlert" :alertMessage="this.alertMessage" :alertType="this.alertType"></Alert>   
-    <v-container class="container custom-container">   
-      <!-- Date -->
-      <v-row>
-        <v-col cols="2" offset="5">
+  <v-row>
+
+    <!-- Alert -->
+    <v-col cols="12">
+      <v-row
+        align="center"
+        justify="center"
+        class="custom-container"
+      >        
+        <v-col cols="12" md="8" sm="12">
+          <Alert class="mb-0" :showAlert="this.showAlert" :alertMessage="this.alertMessage" :alertType="this.alertType"></Alert>     
+        </v-col>
+      </v-row>
+    </v-col>
+
+    <!-- Date & calendar -->
+    <v-col cols="12">
+      <v-row
+        align="center"
+        justify="center"
+        class="custom-container"
+      >        
+        <v-card            
+          class="ml-3 mr-3 pl-6 pr-6 pb-0 mb-0"            
+          tile
+          flat            
+        >
           <v-menu
             v-model="dateMenu"
             :close-on-content-click="true"
             :nudge-right="40"
             transition="scale-transition"
-            offset-y
-            min-width="290px"                        
+            offset-y                                                                  
           >
             <template v-slot:activator="{ on }">
               <v-text-field
@@ -21,7 +41,10 @@
                 readonly
                 v-on="on"
                 solo
+                flat
+                outlined                  
                 class="custom-date-input"
+                error-messages=""                  
               ></v-text-field>
             </template>
             <v-date-picker 
@@ -32,48 +55,84 @@
               :max= maxDate
             ></v-date-picker>
           </v-menu>
+        </v-card>        
+      </v-row>
+    </v-col>
+    
+    <v-col cols="12">
+      <v-row
+        align="center"
+        justify="center"
+        class="custom-container"
+      >
+        <!-- FROM section -->
+        <v-col cols="12" md="3" sm="12">
+          <v-card            
+            class="ml-3 mr-3 pl-6 pr-6 mt-0 pt-0 mb-0 pb-0"            
+            tile
+            flat          
+          >
+            <p class="font-weight-bold text-center">From</p>
+              <!-- Currency From -->
+              <v-select class="pt-0 mt-4"
+                v-model="currencyFrom"
+                v-on:change="getConversionFrom()"
+                :items="currenciesList"
+                item-text="label"
+                item-value="value"
+                flat
+                outlined                        
+                solo>              
+              </v-select>
+            
+            <!-- Amount -->
+              <v-text-field
+                v-model="amountFrom"
+                type="number"
+                v-on:change="getConversionFrom()"
+                value=""
+                solo
+                flat
+                outlined                              
+              ></v-text-field>
+          </v-card>
         </v-col>
-        </v-row>
-      
-        <v-row>
-          <v-col cols="4" offset="1">
-            <p class="font-weight-bold">From</p>
-            <!-- Currency From -->
-            <v-select class="pt-0 mt-4"
-              v-model="currencyFrom"
-              v-on:change="getConversionFrom()"
-              :items="currenciesList"
-              item-text="label"
-              item-value="value"
-              flat
-              outlined         
-              solo>              
-            </v-select>
-          
-          <!-- Amount -->
-            <v-text-field
-              v-model="amountFrom"
-              type="number"
-              v-on:change="getConversionFrom()"
-              value=""
-              solo
-              flat
-              outlined
-            ></v-text-field>
-          </v-col>
-
-          <!-- icon -->
-          <v-col cols="2" >
+        
+        <!-- Swap icon -->
+        <v-col cols="12" md="1" sm="12">
+          <v-card            
+            class="ml-3 mr-3 pl-6 pr-6 mb-5" 
+            flat
+            tile
+          >
+          <!-- visible on md and greater -->
             <v-icon 
-              class="custom-swap-horizontal" 
+              class="d-none d-sm-none d-md-flex" 
               large color="primary"
               @click="switchFromTo()"
-              >mdi-swap-horizontal-bold</v-icon>
-          </v-col>
-      
-      
-          <v-col cols="4">
-            <p class="font-weight-bold">To</p>
+            >
+              mdi-swap-horizontal-bold
+            </v-icon>
+
+            <!-- visible only on sm -->
+            <v-icon 
+              class="d-sm-flex d-md-none" 
+              large color="primary"
+              @click="switchFromTo()"
+            >
+              mdi-swap-vertical-bold
+            </v-icon>
+          </v-card>
+        </v-col>
+          
+        <!-- TO section -->
+        <v-col cols="12" md="3" sm="12">
+          <v-card            
+            class="ml-3 mr-3 pl-6 pr-6 mt-0 pt-0 mb-0 pb-0"
+            flat
+            tile
+          >
+            <p class="font-weight-bold text-center">To</p>
             <!-- Currency To -->
             <v-select class="pt-0 mt-4"
               v-model="currencyTo"
@@ -88,21 +147,22 @@
             
             <!-- Amount -->
             <v-text-field 
-                v-on:change="getConversionTo()"
-                type="number"
-                solo
-                flat
-                outlined
-                v-model="amountTo"
-              ></v-text-field>
-          </v-col>
-
+              v-on:change="getConversionTo()"
+              type="number"
+              solo
+              flat
+              outlined
+              v-model="amountTo"
+            ></v-text-field>
+          </v-card>          
+        </v-col>        
+      
       </v-row>
+    </v-col>
     
-    </v-container>
-  </v-card>
+  </v-row>
+  
 </template>
-
 
 <script>
 
@@ -230,7 +290,4 @@ export default {
 </script>
 
 <style scoped>
-  .custom-swap-horizontal{
-    margin-top: 92px;
-  }
 </style>

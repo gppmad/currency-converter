@@ -2,7 +2,7 @@
   <v-app>
     <Toolbar/>    
      <v-content align="center" class="custom-container">
-      <v-container class="customer-container">
+      <v-container fluid class="customer-container">
         <router-view></router-view>
         <v-spacer></v-spacer> 
       </v-container>

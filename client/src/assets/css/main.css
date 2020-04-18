@@ -32,9 +32,22 @@ color: #ffffff !important;
 }
 
 .custom-container{
-  background-color: rgb(219, 215, 215) !important;
+  background-color: #ffffff!important;
 }
 
 .custom-date-input > .v-input__control > .v-input__slot{
   width: 135px !important;
 }
+
+.theme--light.v-text-field--solo > .v-input__control > .v-input__slot {
+  background: #f5f2f2 !important;
+}
+
+.v-text-field fieldset, .v-text-field .v-input__control, .v-text-field .v-input__slot {
+  border-radius: 5px;
+}
+
+.v-input__control{
+  min-width: 100px !important;
+  
+} 

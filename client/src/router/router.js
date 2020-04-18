@@ -4,6 +4,6 @@ export default [
       name: 'homepage',    
       component: () => import("@/views/Homepage")
       
-    }  
+    }
   ];
   
