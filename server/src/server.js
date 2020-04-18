@@ -12,7 +12,7 @@ var api_manager = new api_management ()
 
 // - - - Avoid conflict with app_request - - - 
 app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+//app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
@@ -42,6 +42,7 @@ app.get('/api/convert/prepare', (req, res) => {
     res_json_obj.lastAvailableDate = "";
     res_json_obj.firstAvailableDate = "";
     var jsonObj = {}
+
     res_json_obj.currenciesList = [
         {
             "label": "EUR - Euro",
