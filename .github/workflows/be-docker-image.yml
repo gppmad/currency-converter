@@ -20,9 +20,10 @@ jobs:
     - name: Login on GitHub Repository
       run:  |    
         docker login docker.pkg.github.com -u MadKerberos -p {{secrets.GITHUB_TOKEN}}
-    - name: Tag Image
-      run:  |    
-        docker tag IMAGE_ID docker.pkg.github.com/madkerberos/currency-converter/IMAGE_NAME:VERSION
-    #- name: Publish Image
+    #- name: Tag Image
     #  run:  |    
-    #    docker push docker.pkg.github.com/madkerberos/currency-converter/IMAGE_NAME:VERSION
+    #    docker tag IMAGE_ID docker.pkg.github.com/madkerberos/currency-converter/IMAGE_NAME:VERSION
+    
+    - name: Publish Image
+      run:  |    
+        docker push docker.pkg.github.com/madkerberos/currency-converter/be-curr-conv:1.0
