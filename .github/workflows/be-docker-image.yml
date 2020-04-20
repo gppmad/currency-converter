@@ -21,3 +21,6 @@ jobs:
     - name: Login on GitHub Repository
       run:  |    
         docker login docker.pkg.github.com -u MadKerberos -p {{secrets.GITHUB_TOKEN}}
+    - name: Tag Image
+      run:  |    
+        docker tag IMAGE_ID docker.pkg.github.com/madkerberos/currency-converter/IMAGE_NAME:VERSION
