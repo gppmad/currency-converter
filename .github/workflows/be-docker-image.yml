@@ -28,12 +28,12 @@ jobs:
 #       run:  |    
 #         docker push docker.pkg.github.com/madkerberos/currency-converter/be-currency-converter:1.0.0
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run:  |
-        docker build ./server -t docker.pkg.github.com/madkerberos/currency-converter/be-currency-converter:1.0.0
-        docker login docker.pkg.github.com -u MadKerberos -p {{secrets.GITHUB_TOKEN}}
-        docker push docker.pkg.github.com/madkerberos/currency-converter/be-currency-converter:1.0.0
+    #steps:
+    #- uses: actions/checkout@v2
+    #- name: Build the Docker image
+    #  run:  |
+    #    docker build ./server -t docker.pkg.github.com/madkerberos/currency-converter/be-currency-converter:1.0.0
+    #    docker login docker.pkg.github.com -u MadKerberos -p {{secrets.GITHUB_TOKEN}}
+    #    docker push docker.pkg.github.com/madkerberos/currency-converter/be-currency-converter:1.0.0
         
       
