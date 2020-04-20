@@ -33,7 +33,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', (req, res) => {
-    res.send("Welcome to Currency Converter Server 2");
+    res.send("Welcome to Currency Converter Server");
 });
 
 // API PREPARE
