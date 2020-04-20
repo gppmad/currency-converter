@@ -15,7 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      #run:  docker build server . --file Dockerfile --tag my-image-name:$(date +%s)
       run:  |
         docker build ./server -t be-currency-converter:1.0.0
     - name: Login on GitHub Repository
@@ -24,3 +23,6 @@ jobs:
     - name: Tag Image
       run:  |    
         docker tag IMAGE_ID docker.pkg.github.com/madkerberos/currency-converter/IMAGE_NAME:VERSION
+    #- name: Publish Image
+    #  run:  |    
+    #    docker push docker.pkg.github.com/madkerberos/currency-converter/IMAGE_NAME:VERSION
