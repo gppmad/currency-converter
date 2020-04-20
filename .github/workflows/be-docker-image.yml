@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run:  |
-        docker build ./server -t be-currency-converter:1.0.0
+        docker build ./server -t docker.pkg.github.com/madkerberos/currency-converter/be-currency-converter:1.0.0
     - name: Login on GitHub Repository
       run:  |    
         docker login docker.pkg.github.com -u MadKerberos -p {{secrets.GITHUB_TOKEN}}
