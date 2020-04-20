@@ -12,18 +12,28 @@ jobs:
 
     runs-on: ubuntu-latest
 
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Build the Docker image
+#       run:  |
+#         docker build ./server -t docker.pkg.github.com/madkerberos/currency-converter/be-currency-converter:1.0.0
+#     - name: Login on GitHub Repository
+#       run:  |    
+#         docker login docker.pkg.github.com -u MadKerberos -p {{secrets.GITHUB_TOKEN}}
+#     #- name: Tag Image
+#     #  run:  |    
+#     #    docker tag IMAGE_ID docker.pkg.github.com/madkerberos/currency-converter/IMAGE_NAME:VERSION
+    
+#     - name: Publish Image
+#       run:  |    
+#         docker push docker.pkg.github.com/madkerberos/currency-converter/be-currency-converter:1.0.0
+
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run:  |
         docker build ./server -t docker.pkg.github.com/madkerberos/currency-converter/be-currency-converter:1.0.0
-    - name: Login on GitHub Repository
-      run:  |    
         docker login docker.pkg.github.com -u MadKerberos -p {{secrets.GITHUB_TOKEN}}
-    #- name: Tag Image
-    #  run:  |    
-    #    docker tag IMAGE_ID docker.pkg.github.com/madkerberos/currency-converter/IMAGE_NAME:VERSION
-    
-    - name: Publish Image
-      run:  |    
         docker push docker.pkg.github.com/madkerberos/currency-converter/be-currency-converter:1.0.0
+        
+      
