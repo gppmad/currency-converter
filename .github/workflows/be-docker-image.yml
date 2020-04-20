@@ -18,3 +18,6 @@ jobs:
       #run:  docker build server . --file Dockerfile --tag my-image-name:$(date +%s)
       run:  |
         docker build ./server -t be-currency-converter:1.0.0
+    - name: Login on GitHub Repository
+      run:  |    
+        docker login docker.pkg.github.com -u MadKerberos -p {{secrets.GITHUB_TOKEN}}
