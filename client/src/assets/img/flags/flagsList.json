@@ -1,0 +1,136 @@
+{
+    "data": [
+        {
+            "flagId": "eu",
+            "value": "EUR"
+        },
+        {
+            "flagId": "jp",
+            "value": "JPY"
+        },
+        {
+            "flagId": "bg",
+            "value": "BGN"
+        },
+        {
+            "flagId": "us",
+            "value": "USD"
+        },
+        {
+            "flagId": "cz",
+            "value": "CZK"
+        },
+        {
+            "flagId": "dk",
+            "value": "DKK"
+        },
+        {
+            "flagId": "gb",
+            "value": "GBP"
+        },
+        {
+            "flagId": "hu",
+            "value": "HUF"
+        },
+        {
+            "flagId": "pl",
+            "value": "PLN"
+        },
+        {
+            "flagId": "ro",
+            "value": "RON"
+        },
+        {
+            "flagId": "se",
+            "value": "SEK"
+        },
+        {
+            "flagId": "ch",
+            "value": "CHF"
+        },
+        {
+            "flagId": "is",
+            "value": "ISK"
+        },
+        {
+            "flagId": "no",
+            "value": "NOK"
+        },
+        {
+            "flagId": "hr",
+            "value": "HRK"
+        },
+        {
+            "flagId": "ru",
+            "value": "RUB"
+        },
+        {
+            "flagId": "tr",
+            "value": "TRY"
+        },
+        {
+            "flagId": "au",
+            "value": "AUD"
+        },
+        {
+            "flagId": "br",
+            "value": "BRL"
+        },
+        {
+            "flagId": "ca",
+            "value": "CAD"
+        },
+        {
+            "flagId": "cn",
+            "value": "CNY"
+        },
+        {
+            "flagId": "hk",
+            "value": "HKD"
+        },
+        {
+            "flagId": "id",
+            "value": "IDR"
+        },
+        {
+            "flagId": "il",
+            "value": "ILS"
+        },
+        {
+            "flagId": "in",
+            "value": "INR"
+        },
+        {
+            "flagId": "kr",
+            "value": "KRW"
+        },
+        {
+            "flagId": "mx",
+            "value": "MXN"
+        },
+        {
+            "flagId": "my",
+            "value": "MYR"
+        },
+        {
+            "flagId": "nz",
+            "value": "NZD"
+        },
+        {
+            "flagId": "ph",
+            "value": "PHP"
+        },
+        {
+            "flagId": "sg",
+            "value": "SGD"
+        },
+        {
+            "flagId": "th",
+            "value": "THB"
+        },
+        {
+            "flagId": "za",
+            "value": "ZAR"
+        }
+    ]
+}
