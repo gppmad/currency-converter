@@ -1,4 +1,9 @@
 <template>
+<v-card            
+    class="ml-3 mr-3 pl-3 pr-3 mt-0 pt-0 mb-0 pb-0"            
+    tile
+    flat          
+  >
   <v-alert
     class="text-center mb-0"
     :value="showAlert"
@@ -9,6 +14,7 @@
   >
     {{alertMessage}}
   </v-alert>
+</v-card>
 </template>
 
 <script>

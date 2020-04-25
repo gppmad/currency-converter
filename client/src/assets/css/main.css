@@ -47,7 +47,7 @@ color: #ffffff !important;
   border-radius: 5px;
 }
 
-.v-input__control{
-  min-width: 100px !important;
-  
+ .v-input__control{
+  min-width: 120px !important;
 } 
+
