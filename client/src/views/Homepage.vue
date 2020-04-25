@@ -14,50 +14,66 @@
     </v-col>
 
 
-    <!-- Date & calendar -->
-    <v-col cols="12">      
+    <!-- Date & calendar -->    
+    <v-col cols="12">
       <v-row
         align="center"
         justify="center"
         class="custom-container"
-      >        
-        <v-card            
-          class="ml-3 mr-3 pl-6 pr-6 pb-0 mb-0"            
-          tile
-          flat            
-        >
-          <v-menu
-            v-model="dateMenu"
-            :close-on-content-click="true"
-            :nudge-right="40"
-            transition="scale-transition"
-            offset-y                                                                         
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                v-model="date"
-                label="Date"
-                prepend-icon="event"
-                readonly
-                v-on="on"
-                solo
-                flat
-                outlined                              
-                class="custom-date-input"
-                hide-details                                                     
-              ></v-text-field>
-            </template>
-            <v-date-picker 
-              v-model="date" 
-              v-on:change="getConversionFrom()"
-              @input="referenceDate = false" 
-              :min= minDate
-              :max= maxDate              
-            ></v-date-picker>
-          </v-menu>
-        </v-card>        
+      >      
+        <v-col cols="12" md="2" sm="12">
+          <v-card            
+            class="ml-3 mr-3 pl-3 pr-3 mt-0 pt-0 mb-0 pb-0"            
+            tile
+            flat          
+          >         
+            <v-row>
+              <!-- icon calendar -->
+              <v-col cols="3" md="3" sm="3">
+                <v-icon 
+                  x-large
+                  :class="[{'text-right': this.$vuetify.breakpoint.mdAndUp }]"
+                >
+                  mdi-calendar
+                </v-icon>
+              </v-col>
+
+              <!-- input date -->
+              <v-col cols="9" md="5"  sm="9" class="pt-0">
+                <v-menu
+                  v-model="dateMenu"
+                  :close-on-content-click="true"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y                                                                         
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      v-model="date"
+                      label="Date"                      
+                      readonly
+                      v-on="on"
+                      solo
+                      flat
+                      outlined                                                   
+                      hide-details                                                     
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker 
+                    v-model="date" 
+                    v-on:change="getConversionFrom()"
+                    @input="referenceDate = false" 
+                    :min= minDate
+                    :max= maxDate              
+                  ></v-date-picker>
+                </v-menu>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
       </v-row>
     </v-col>
+
 
     <v-col cols="12">
       <v-row
@@ -66,28 +82,28 @@
         class="custom-container"
       >
 
-        <!-- FROM secntion -->
-        <v-col cols="12" md="4" sm="12">
+        <!-- FROM section -->
+        <v-col cols="12" md="4" sm="12" xs="12">
           <v-card            
-            class="ml-3 mr-3 pl-6 pr-6 mt-0 pt-0 mb-0 pb-0"            
+            class="ml-3 mr-3 pl-3 pr-3 mt-0 pt-0 mb-0 pb-0"            
             tile
             flat          
           >         
 
             <v-row>
               <!-- Flag From -->
-              <v-col cols="3" class="pt-0">
+              <v-col cols="3" class="pt-0"
+                :class="[{'text-right': this.$vuetify.breakpoint.mdAndUp}]"
+              >
                 <v-avatar class="flag-style" 
-                  :class="[{'mt-11': this.$vuetify.breakpoint.mdAndUp, 'mt-10': !this.$vuetify.breakpoint.mdAndUp }]">
-                  
+                  :class="[{'mt-5': this.$vuetify.breakpoint.mdAndUp, 'mt-4': !this.$vuetify.breakpoint.mdAndUp }]">                  
                   <v-img
                     :src="require('../assets/img/flags/' + getIdFlag(currencyFrom) + '.svg')"
                   />
                 </v-avatar>
               </v-col>
 
-              <v-col cols="9" class="pt-0">
-                <p class="font-weight-bold text-center mb-0">From</p>               
+              <v-col cols="9" class="pt-0">              
                 <v-select class="mt-4 mb-4"
                   v-model="currencyFrom"
                   v-on:change="getConversionFrom()"
@@ -101,7 +117,7 @@
                   solo>          
                 </v-select>
             
-                <!-- Amount -->
+                <!-- Amount from-->
                 <v-text-field
                   v-model="amountFrom"
                   type="number"
@@ -120,16 +136,17 @@
 
 
       <!-- Swap icon md-->
-        <v-col cols="12" md="1" class="d-none d-sm-none d-md-flex">
+        <v-col cols="12" md="2" class="hidden-sm-and-down">
           <v-card            
-            class="ml-3 mr-3 pl-6 pr-6 mt-0 pt-0 mb-0 pb-0"
+            class="ml-3 mr-3 pl-3 pr-3 mt-0 pt-0 mb-0 pb-0"
             flat
             tile
           >                     
             <v-row 
-             align="center"
-            justify="center"
-            class="custom-container">                                    
+              align="center"
+              justify="center"
+              class="custom-container"
+            >                                    
               <v-col cols="12" class="pt-0">
                 <v-card                               
                   flat
@@ -150,28 +167,31 @@
 
        
         <!-- Swap icon sm-->
-        <v-col cols="12" sm="12" class="d-sm-flex d-md-none">
+        <v-col cols="12" sm="12" class="hidden-md-and-up">
           <v-card            
-            class="ml-3 mr-3 pl-6 pr-6 mt-0 pt-0 mb-0 pb-0"
+            class="ml-3 mr-3 pl-3 pr-3 mt-0 pt-0 mb-0 pb-0"
             flat
             tile
-          >                     
-            <v-row>                                     
-              <v-col cols="9" offset="3" class="pt-0">
-                <v-card            
-                  class="ml-3 mr-3 pl-6 pr-6 mb-5" 
-                  flat
-                  tile
-                >
-                  <v-icon 
+          >          
+            <v-row
+            align="center"
+            justify="center"
+            class="custom-container"
+            >                         
+              <v-col 
+                cols="6" offset="3" class="pt-0" 
+                align="center"
+                justify="center"
+              >
+                <v-icon 
                     class="d-sm-flex d-md-none" 
                     large color="primary"
                     @click="switchFromTo()"
                   >
                     mdi-swap-vertical-bold
-                  </v-icon>  
-                </v-card>          
-              </v-col>              
+                  </v-icon>         
+              </v-col>
+              
             </v-row>
           </v-card>          
         </v-col>
@@ -180,16 +200,18 @@
         <!-- TO section -->
         <v-col cols="12" md="4" sm="12">
           <v-card            
-            class="ml-3 mr-3 pl-6 pr-6 mt-0 pt-0 mb-0 pb-0"
+            class="ml-3 mr-3 pl-3 pr-3 mt-0 pt-0 mb-0 pb-0"
             flat
             tile
           >
 
             <!-- Flag To -->
             <v-row>           
-              <v-col cols="3" class="pt-0">
+              <v-col cols="3" class="pt-0"
+                :class="[{'text-right': this.$vuetify.breakpoint.mdAndUp}]"
+                >
                 <v-avatar class="flag-style"
-                  :class="[{'mt-11': this.$vuetify.breakpoint.mdAndUp, 'mt-10': !this.$vuetify.breakpoint.mdAndUp }]">
+                  :class="[{'mt-5': this.$vuetify.breakpoint.mdAndUp, 'mt-3': !this.$vuetify.breakpoint.mdAndUp }]">
                   <v-img
                     :src="require('../assets/img/flags/' + getIdFlag(currencyTo) + '.svg')"
                   />
@@ -197,8 +219,7 @@
               </v-col>   
               
               <!-- Currency To -->              
-              <v-col cols="9" class="pt-0">
-                <p class="font-weight-bold text-center mb-0">To</p>
+              <v-col cols="9" class="pt-0">                
                 <v-select class="pt-0 mt-4 mb-4"
                   v-model="currencyTo"
                   :items="currenciesList"
@@ -240,7 +261,7 @@
 
 import axios from 'axios';
 import Alert from '../components/Alert.vue';
-import flagsList from "../assets/img/flags/flagsList.json"
+import flagsList from "../data/flagsList.json"
 
 export default {
   name: 'Homepage',
@@ -370,22 +391,11 @@ export default {
 
       return currentFlag;
     }
-    
-    
-
-
   }
-    
-
-
 }
 </script>
 
 <style scoped>
-.flag-icon{
-  font-size: 40px;
-  border-radius: 50%;
-}
 
 .flag-style{
   width: 50px;
@@ -393,5 +403,4 @@ export default {
   border-radius: 50%;
   border: 1px solid lightgray;
 }
-
 </style>
