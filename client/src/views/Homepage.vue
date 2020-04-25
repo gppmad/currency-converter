@@ -29,17 +29,14 @@
           >         
             <v-row>
               <!-- icon calendar -->
-              <v-col cols="3" md="3" sm="3">
-                <v-icon 
-                  x-large
-                  :class="[{'text-right': this.$vuetify.breakpoint.mdAndUp }]"
-                >
+              <v-col cols="3" md="5" sm="3" :class="[{'text-right': this.$vuetify.breakpoint.mdAndUp}]">
+                <v-icon x-large>
                   mdi-calendar
                 </v-icon>
               </v-col>
 
               <!-- input date -->
-              <v-col cols="9" md="5"  sm="9" class="pt-0">
+              <v-col cols="9" md="7"  sm="9" class="pt-0">
                 <v-menu
                   v-model="dateMenu"
                   :close-on-content-click="true"
